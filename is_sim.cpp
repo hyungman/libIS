@@ -34,6 +34,13 @@
 #include "is_command.h"
 #include "is_simstate.h"
 
+//Mac OS sockets
+#ifndef SOCK_NONBLOCK
+#include <fcntl.h>
+# define SOCK_NONBLOCK O_NONBLOCK
+#endif
+
+
 namespace is {
 namespace sim {
 
