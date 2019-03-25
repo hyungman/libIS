@@ -20,6 +20,7 @@
 #include <array>
 #include <unordered_map>
 #include <vector>
+#include <string>
 #include <mpi.h>
 #include "is_common.h"
 
