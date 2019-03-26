@@ -35,11 +35,14 @@
 #include "is_simstate.h"
 
 //Mac OS sockets
+#if __APPLE__
 #ifndef SOCK_NONBLOCK
 #include <fcntl.h>
-# define SOCK_NONBLOCK O_NONBLOCK
+#define SOCK_NONBLOCK O_NONBLOCK
 #endif
 
+#define MSG_NOSIGNAL 0x2000 /* don't raise SIGPIPE */
+#endif	// __APPLE__
 
 namespace is {
 namespace sim {
