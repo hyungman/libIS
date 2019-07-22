@@ -45,7 +45,7 @@ std::vector<SimState> query();
  * This call will block until the simulation responds with
  * the data.
  */
-std::future<std::vector<SimState>> query_async();
+std::future<std::vector<SimState> > query_async();
 /* Disconnect the client from the simulation, closing the
  * intercommunicator and shutting down the library.
  */
