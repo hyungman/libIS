@@ -46,7 +46,7 @@ libISBox3f bounds;
 
 std::vector<float> field_one;
 std::vector<uint8_t> field_two;
-const std::array<uint64_t, 3> field_dims({32, 32, 32});
+const uint64_t field_dims[3] = {32, 32, 32};
 
 void init();
 void step();
@@ -83,7 +83,9 @@ int main(int ac, char **av) {
 	libISSimState *libis_state = libISMakeSimState();
 
 	libISVec3f world_min{0.f, 0.f, 0.f};
-	libISVec3f world_max{grid.x, grid.y, grid.z};
+	libISVec3f world_max{static_cast<float>(grid.x), \
+                             static_cast<float>(grid.y), \
+                             static_cast<float>(grid.z)};
 	libISBox3f world_bounds = libISMakeBox3f();
 	libISBoxExtend(&world_bounds, &world_min);
 	libISBoxExtend(&world_bounds, &world_max);
@@ -94,8 +96,8 @@ int main(int ac, char **av) {
 
 	// Setup the shared pointers to our particle and field data
 	libISSetParticles(libis_state, NUM_PARTICLES, 0, sizeof(Particle), particle.data());
-	libISSetField(libis_state, "field_one", field_dims.data(), FLOAT, field_one.data());
-	libISSetField(libis_state, "field_two", field_dims.data(), UINT8, field_two.data());
+	libISSetField(libis_state, "field_one", field_dims, FLOAT, field_one.data());
+	libISSetField(libis_state, "field_two", field_dims, UINT8, field_two.data());
 
 	for (int i = 0; i < N_STEPS; ++i) {
 		MPI_Barrier(sim_comm);
