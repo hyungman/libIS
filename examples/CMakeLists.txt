@@ -28,3 +28,7 @@ target_link_libraries(example_client PUBLIC is_client ${MPI_CXX_LIBRARIES})
 target_include_directories(example_client PUBLIC
 	$<BUILD_INTERFACE:${MPI_CXX_INCLUDE_PATH}>)
 
+set_target_properties(example_sim example_client
+	PROPERTIES
+	CXX_STANDARD 11
+	CXX_STANDARD_REQUIRED ON)
