@@ -1,6 +1,8 @@
-# libIS
+![libIS](libis-logo.svg)
 
-In situ data management layer for easily using in transit visualization.
+---
+
+libIS is an in situ data management layer for easily using or prototyping in transit visualization.
 An example video of the our viewer can be seen on [YouTube](https://youtu.be/YUH55CvPmxg),
 the viewer code is available [here](https://github.com/ospray/ospray_senpai).
 This is the code for the core library described in the paper, see
@@ -103,6 +105,10 @@ connect to a simulation with this approach.
 - `simWorld`: the simulation's `MPI_COMM_WORLD`, or equivalent if not
 	running on all ranks in world.
 - `port`: the port that libIS should listen for client connections on
+
+Note: this is temporarily broken, though may not be needed since the socket fallback
+layer can provide connect/disconnect functionality even when `MPI_Open_port` is not
+available. If this API is needed please revert to commit `dcc46d9` for now.
 
 ```c
 void libISInitWithExisting(MPI_Comm simWorld, MPI_Comm clientComm);

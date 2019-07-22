@@ -62,6 +62,7 @@ int main(int ac, char **av) {
 			NUM_PARTICLES = std::atoi(av[++i]);
 		} else if (std::strcmp(av[i], "-quiet") == 0) {
 			quiet = true;
+		}
 	}
 
 	MPI_Comm sim_comm = MPI_COMM_WORLD;
@@ -99,7 +100,7 @@ int main(int ac, char **av) {
 	for (int i = 0; i < N_STEPS; ++i) {
 		MPI_Barrier(sim_comm);
 		step();
-		std::this_thread::sleep_for(std::chrono::seconds(2));
+		std::this_thread::sleep_for(std::chrono::milliseconds(500));
 		if (rank == 0 && !quiet) {
 			std::cout << "Timestep " << i << "\n";
 		}

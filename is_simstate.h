@@ -23,6 +23,7 @@
 #include <string>
 #include <mpi.h>
 #include "is_common.h"
+#include "intercomm.h"
 
 namespace is {
 
@@ -81,8 +82,8 @@ struct Field {
 	Field(const std::string &name, libISDType type, const uint64_t dims[3],
 			std::shared_ptr<Array> &array);
 
-	void send(MPI_Comm comm, const int rank, const int tag) const;
-	static Field recv(MPI_Comm comm, const int rank, const int tag);
+	void send(std::shared_ptr<InterComm> &intercomm, const int rank) const;
+	static Field recv(std::shared_ptr<InterComm> &intercomm, const int rank);
 };
 
 /* An array of particles in the simulation, along with any ghost particles
@@ -96,8 +97,8 @@ struct Particles {
 	Particles(uint64_t numParticles, uint64_t numGhost,
 			std::shared_ptr<Array> &array);
 
-	void send(MPI_Comm comm, const int rank, const int tag) const;
-	static Particles recv(MPI_Comm comm, const int rank, const int tag);
+	void send(std::shared_ptr<InterComm> &intercomm, const int rank) const;
+	static Particles recv(std::shared_ptr<InterComm> &intercomm, const int rank);
 };
 
 /* A region is a box of space containing some particle
